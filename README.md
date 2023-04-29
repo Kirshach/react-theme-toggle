@@ -1,6 +1,6 @@
 # react-theme-toggle
 
-A simple React component to toggle between light and dark themes.
+A simple React component to toggle between light, dark, and system-preferred color schemes.
 
 ## Features
 
@@ -29,21 +29,19 @@ function App() {
 export default App;
 ```
 
-Next, use the ThemeToggle component to provide a button for users to switch themes:
+Then, use the ThemeToggleButton component to add a button that toggles the theme:
 
 ```jsx
-import { ThemeToggle } from "react-theme-toggle";
+import { ThemeToggleButton } from "react-theme-toggle";
 
-function Navbar() {
+function Header() {
   return (
-    <nav>
-      {/* Other navbar elements */}
-      <ThemeToggle>Toggle Theme</ThemeToggle>
-    </nav>
+    <header>
+      {/* Other header content */}
+      <ThemeToggleButton> Toggle Theme </ThemeToggleButton>
+    </header>
   );
 }
-
-export default Navbar;
 ```
 
 To access the current theme, use the useTheme hook:
@@ -80,10 +78,10 @@ export default CustomThemeToggle;
 
 ## API Reference
 
-| Component     | Description                                                                         | Props                                |
-| ------------- | ----------------------------------------------------------------------------------- | ------------------------------------ |
-| ThemeProvider | A context provider for handling the theme state. Wrap your app with this component. | children: React.ReactNode (required) |
-| ThemeToggle   | A button component for toggling the theme.                                          | children: React.ReactNode (required) |
+| Component         | Description                                                                         | Props                                                                                    |
+| ----------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| ThemeProvider     | A context provider for handling the theme state. Wrap your app with this component. | children: React.ReactNode (required)                                                     |
+| ThemeToggleButton | A button component for toggling the theme.                                          | children: React.ReactNode (optional), ...React.ButtonHTMLAttributes\<HTMLButtonElement\> |
 
 | Hook           | Description                                                                      | Returns                                                                                                                                                                                                                                        |
 | -------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

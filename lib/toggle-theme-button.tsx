@@ -29,17 +29,19 @@ const handleButtonClick = ({
   handleThemeToggleChange(newValue);
 };
 
-export const ThemeToggle: FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const ToggleThemeButton: FC<
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+> = ({ children, onClick = () => {}, ...props }) => {
   const { themeToggleValue, handleThemeToggleChange } = useThemeToggle();
 
   return (
     <button
+      {...props}
       type="button"
-      onClick={() =>
-        handleButtonClick({ themeToggleValue, handleThemeToggleChange })
-      }
+      onClick={(e) => {
+        handleButtonClick({ themeToggleValue, handleThemeToggleChange });
+        onClick(e);
+      }}
     >
       {children}
     </button>
