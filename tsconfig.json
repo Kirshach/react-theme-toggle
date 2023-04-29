@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "nodenext",
+    "outDir": "./dist",
+    "rootDir": "./lib",
+    "strict": true,
+    "target": "es2016"
+  }
+}
