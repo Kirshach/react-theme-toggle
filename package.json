@@ -1,6 +1,6 @@
 {
   "name": "react-theme-toggle",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple react component to toggle between light and dark theme.",
   "files": [
     "dist"
@@ -12,7 +12,11 @@
     "build": "vite build && npm run build:types",
     "build:types": "dts-bundle-generator --project tsconfig.json --out-file dist/index.d.ts lib/index.ts"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "theme",
+    "theming"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {

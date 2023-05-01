@@ -5,21 +5,22 @@ import {
   LOCAL_STORAGE_THEME_TOGGLE_VALUE_KEY,
   ThemeContext,
   type Theme,
+  type ToggleValue,
 } from "./theme-context";
 
 const localStorageThemeToggleValue = localStorage.getItem(
   LOCAL_STORAGE_THEME_TOGGLE_VALUE_KEY
-) as Theme | null;
+) as ToggleValue | null;
 
 const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
 export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [toggleValue, setToggleValue] = useState<Theme>(
+  const [toggleValue, setToggleValue] = useState<ToggleValue>(
     localStorageThemeToggleValue || "media"
   );
-  const [mediaQueryValue, setMediaQueryValue] = useState<
-    Exclude<Theme, "media">
-  >(darkModeMediaQuery.matches ? "dark" : "light");
+  const [mediaQueryValue, setMediaQueryValue] = useState<Theme>(
+    darkModeMediaQuery.matches ? "dark" : "light"
+  );
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_THEME_TOGGLE_VALUE_KEY, toggleValue);

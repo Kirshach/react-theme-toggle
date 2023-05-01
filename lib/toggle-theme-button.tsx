@@ -1,18 +1,18 @@
 import React, { type FC } from "react";
 
-import { useThemeToggle } from "./hooks/use-theme-toggle";
-import { type Theme } from "./theme-context";
+import { useThemeToggleValueState } from "./hooks/use-theme-toggle-value";
+import { type ToggleValue } from "./theme-context";
 
 const handleButtonClick = ({
-  themeToggleValue,
-  handleThemeToggleChange,
+  toggleValue,
+  setToggleValue,
 }: {
-  themeToggleValue: Theme;
-  handleThemeToggleChange: (value: Theme) => void;
+  toggleValue: ToggleValue;
+  setToggleValue: (value: ToggleValue) => void;
 }) => {
-  let newValue: Theme;
+  let newValue: ToggleValue;
 
-  switch (themeToggleValue) {
+  switch (toggleValue) {
     case "light":
       newValue = "media";
       break;
@@ -26,20 +26,28 @@ const handleButtonClick = ({
       newValue = "media";
   }
 
-  handleThemeToggleChange(newValue);
+  setToggleValue(newValue);
 };
 
 export const ToggleThemeButton: FC<
   React.ButtonHTMLAttributes<HTMLButtonElement>
 > = ({ children, onClick = () => {}, ...props }) => {
-  const { themeToggleValue, handleThemeToggleChange } = useThemeToggle();
+  const [toggleValue, setToggleValue] = useThemeToggleValueState();
 
   return (
     <button
-      {...props}
       type="button"
+      aria-pressed={
+        toggleValue === "dark"
+          ? "true"
+          : toggleValue === "light"
+          ? "false"
+          : "mixed"
+      }
+      aria-label="Toggle theme: light (off), system preference (mixed), or dark (on)"
+      {...props}
       onClick={(e) => {
-        handleButtonClick({ themeToggleValue, handleThemeToggleChange });
+        handleButtonClick({ toggleValue, setToggleValue });
         onClick(e);
       }}
     >

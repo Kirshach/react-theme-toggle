@@ -6,15 +6,17 @@ export const ThemeContextToggleValue = {
   DARK: "dark",
 } as const;
 
-export type Theme =
+export type ToggleValue =
   (typeof ThemeContextToggleValue)[keyof typeof ThemeContextToggleValue];
+export type Theme = Exclude<ToggleValue, "media">;
 
 export interface ThemeContextValue {
-  toggleValue?: Theme;
-  mediaQueryValue?: Exclude<Theme, "media">;
-  setToggleValue?: React.Dispatch<React.SetStateAction<Theme>>;
+  toggleValue?: ToggleValue;
+  mediaQueryValue?: Theme;
+  setToggleValue?: React.Dispatch<React.SetStateAction<ToggleValue>>;
 }
 
 export const ThemeContext = createContext<ThemeContextValue>({});
 
-export const LOCAL_STORAGE_THEME_TOGGLE_VALUE_KEY = "app_theme_toggle_value";
+export const LOCAL_STORAGE_THEME_TOGGLE_VALUE_KEY =
+  "react-theme-toggle__current-toggle-value";
