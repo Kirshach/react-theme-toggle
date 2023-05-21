@@ -28,7 +28,7 @@ const App = () => {
 };
 ```
 
-Then, use the ThemeToggleButton component to add a button that toggles the theme:
+Then, use the ToggleThemeButton component to add a button that toggles the theme:
 
 ```jsx
 import { ToggleThemeButton } from "react-theme-toggle";
