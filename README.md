@@ -2,6 +2,8 @@
 
 A simple React component to toggle between light, dark, and system-preferred color schemes.
 
+See [StackBlitz Example](https://react-ts-b1qbua.stackblitz.io) to observe the component in the wild
+
 ## Features
 
 - Toggles between light, dark, and system (media) themes
