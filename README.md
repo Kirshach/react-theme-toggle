@@ -31,13 +31,13 @@ const App = () => {
 Then, use the ThemeToggleButton component to add a button that toggles the theme:
 
 ```jsx
-import { ThemeToggleButton } from "react-theme-toggle";
+import { ToggleThemeButton } from "react-theme-toggle";
 
 const Header = () => {
   return (
     <header>
       {/* Other header content */}
-      <ThemeToggleButton> Toggle Theme </ThemeToggleButton>
+      <ToggleThemeButton> Toggle Theme </ToggleThemeButton>
     </header>
   );
 };
