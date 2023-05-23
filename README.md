@@ -1,8 +1,8 @@
 # react-theme-toggle
 
-A simple React component to toggle between light, dark, and system-preferred color schemes.
+A headless customizable React component to toggle between light, dark, and system-preferred color schemes.
 
-See [StackBlitz Example](https://react-ts-b1qbua.stackblitz.io) to observe the component in the wild
+See [StackBlitz Example](https://react-ts-b1qbua.stackblitz.io) to see the component in action
 
 ## Features
 
@@ -20,7 +20,7 @@ npm install react-theme-toggle
 
 ## Usage
 
-First, wrap your application with the ThemeProvider component:
+First, wrap your application with the `ThemeProvider` component:
 
 ```jsx
 import { ThemeProvider } from "react-theme-toggle";
@@ -30,7 +30,7 @@ const App = () => {
 };
 ```
 
-Then, use the ToggleThemeButton component to add a button that toggles the theme:
+Then, use the `ToggleThemeButton` component to add a button that toggles the theme:
 
 ```jsx
 import { ToggleThemeButton } from "react-theme-toggle";
@@ -45,7 +45,7 @@ const Header = () => {
 };
 ```
 
-To access the current theme, use the useTheme hook:
+To access the current theme, use the `useTheme` hook:
 
 ```jsx
 import { useTheme } from "react-theme-toggle";
@@ -57,7 +57,7 @@ const MyComponent = () => {
 };
 ```
 
-For more advanced use cases, you can use the useThemeToggleValueState hook to get the current theme toggle value and a function to change it:
+For more advanced use cases, you can use the `useThemeToggleValueState` hook to get the current theme toggle value and a function to change it:
 
 ```jsx
 import { useThemeToggleValueState } from "react-theme-toggle";
@@ -76,10 +76,33 @@ const CustomThemeToggle = () => {
 };
 ```
 
-## Styling
+## Customization
 
-The ThemeToggleButton component accepts a className prop that can be used to style the button.
-To style different states of the button, consider utilizing the component's className along with the aria-pressed attribute:
+### Toggle Order
+
+To customize the order in which the theme is toggled, pass a `toggleOrder` prop to the `ToggleThemeButton` component:
+
+```jsx
+import { ToggleThemeButton } from "react-theme-toggle";
+
+const Header = () => {
+  return (
+    <header>
+      {/* Other header content */}
+      <ToggleThemeButton toggleOrder={["dark", "light", "media"]}>
+        Toggle Theme
+      </ToggleThemeButton>
+    </header>
+  );
+};
+```
+
+The `toggleOrder` prop accepts an array of `ToggleValue` values. The default toggle order is `["light", "media", "dark"]`.
+
+### Styling
+
+The `ThemeToggleButton` component accepts a `className` prop that can be used to style the button.
+To style different states of the button, consider utilizing the component's className along with `aria-pressed` attribute:
 
 ```css
 .theme-toggle-button {
@@ -99,10 +122,10 @@ To style different states of the button, consider utilizing the component's clas
 
 ## API Reference
 
-| Component         | Description                                                                                  | Props                                           |
-| ----------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| ThemeProvider     | A context provider for handling the theme state. Wrap your app with this component.          | { children: React.ReactNode }                   |
-| ThemeToggleButton | A button component for toggling the theme. Switched themes from "light" to "media" to "dark" | React.ButtonHTMLAttributes\<HTMLButtonElement\> |
+| Component         | Description                                                                                  | Props                                                                             |
+| ----------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| ThemeProvider     | A context provider for handling the theme state. Wrap your app with this component.          | { children: React.ReactNode }                                                     |
+| ThemeToggleButton | A button component for toggling the theme. Switched themes from "light" to "media" to "dark" | { toggleOrder: ToggleValue[], ...React.ButtonHTMLAttributes\<HTMLButtonElement\>} |
 
 | Hook                     | Description                                                                      | Returns                                                                                                                                                                                                     |
 | ------------------------ | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

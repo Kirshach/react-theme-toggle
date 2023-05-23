@@ -6,48 +6,55 @@ import { type ToggleValue } from "./theme-context";
 const handleButtonClick = ({
   toggleValue,
   setToggleValue,
+  toggleOrder,
 }: {
   toggleValue: ToggleValue;
   setToggleValue: (value: ToggleValue) => void;
+  toggleOrder: ToggleValue[];
 }) => {
-  let newValue: ToggleValue;
-
-  switch (toggleValue) {
-    case "light":
-      newValue = "media";
-      break;
-    case "media":
-      newValue = "dark";
-      break;
-    case "dark":
-      newValue = "light";
-      break;
-    default:
-      newValue = "media";
-  }
-
-  setToggleValue(newValue);
+  setToggleValue(
+    toggleOrder[(toggleOrder.indexOf(toggleValue) + 1) % toggleOrder.length]
+  );
 };
 
 export const ToggleThemeButton: FC<
-  React.ButtonHTMLAttributes<HTMLButtonElement>
-> = ({ children, onClick = () => {}, ...props }) => {
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    toggleOrder?: ToggleValue[];
+  }
+> = ({
+  toggleOrder = ["light", "media", "dark"],
+  children,
+  onClick = () => {},
+  ...props
+}) => {
   const [toggleValue, setToggleValue] = useThemeToggleValueState();
+
+  if (toggleOrder.length > 3 || toggleOrder.length < 2) {
+    throw new Error(
+      `ToggleThemeButton has no clue what to do with [${toggleOrder.join(
+        ", "
+      )}] toggleOrder. It must be an array of 2 or 3 values.`
+    );
+  }
 
   return (
     <button
       type="button"
       aria-pressed={
-        toggleValue === "dark"
-          ? "true"
-          : toggleValue === "light"
+        toggleValue === toggleOrder[0]
           ? "false"
+          : toggleValue === toggleOrder[toggleOrder.length - 1]
+          ? "true"
           : "mixed"
       }
-      aria-label="Toggle theme: light (off), system preference (mixed), or dark (on)"
+      aria-label={
+        toggleOrder.length === 3
+          ? `Toggle theme: ${toggleOrder[0]} (off), ${toggleOrder[1]} (mixed), or ${toggleOrder[2]} (on)`
+          : `Toggle theme: ${toggleOrder[0]} (off) or ${toggleOrder[1]} (on)`
+      }
       {...props}
       onClick={(e) => {
-        handleButtonClick({ toggleValue, setToggleValue });
+        handleButtonClick({ toggleValue, setToggleValue, toggleOrder });
         onClick(e);
       }}
     >

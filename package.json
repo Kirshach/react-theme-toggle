@@ -1,6 +1,6 @@
 {
   "name": "react-theme-toggle",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A simple React component to toggle between light, dark, and system-preferred color schemes",
   "files": [
     "dist"
